@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help & Support | FoodExpress</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #020617, #020617 40%, #000 100%);
+      color: #e5e7eb;
+    }
+
+    header {
+      background-color: rgba(3, 7, 18, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(55, 65, 81, 0.7);
+      padding: 12px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #f97316;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #9ca3af;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #f97316, #facc15);
+      transition: width 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #f9fafb;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .active-link {
+      color: #f9fafb;
+    }
+
+    .active-link::after {
+      width: 100%;
+    }
+
+    .login-btn {
+      padding: 6px 14px;
+      border-radius: 4px;
+      border: 1px solid #f97316;
+      background-color: transparent;
+      color: #f97316;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .signup-btn {
+      padding: 6px 14px;
+      border-radius: 4px;
+      border: none;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      cursor: pointer;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 32px auto 56px;
+      padding: 20px 18px 32px;
+      border-radius: 24px;
+      background: radial-gradient(circle at top left, #020617, #020617);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    }
+
+    .page-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 24px;
+      max-width: 640px;
+    }
+
+    .options-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .option-card {
+      background: radial-gradient(circle at top left, #020617, #020617);
+      border-radius: 14px;
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
+      padding: 16px 18px 18px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .option-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 1);
+    }
+
+    .option-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .option-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #f9fafb;
+    }
+
+    .option-text {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+
+    .helpline-number {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 8px;
+      color: #f97316;
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      background-color: #020617;
+      color: #e5e7eb;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .secondary-btn:hover {
+      border-color: #9ca3af;
+    }
+
+    .chat-section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 8px 0 12px;
+    }
+
+    .chat-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .chat-wrapper {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .chat-container {
+      background-color: #020617;
+      border-radius: 16px;
+      border: 1px solid #374151;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      display: flex;
+      flex-direction: column;
+      height: 320px;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      padding: 10px 14px;
+      border-bottom: 1px solid #111827;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bot-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #facc15, #f97316);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #111827;
+      font-weight: 700;
+    }
+
+    .bot-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .bot-subtitle {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 10px 14px;
+      overflow-y: auto;
+      font-size: 13px;
+    }
+
+    .msg {
+      max-width: 80%;
+      padding: 8px 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .msg-bot {
+      background-color: #020617;
+      border: 1px solid #374151;
+      color: #e5e7eb;
+    }
+
+    .msg-user {
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      margin-left: auto;
+    }
+
+    .msg-meta {
+      font-size: 11px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .chat-input-row {
+      padding: 8px 10px;
+      border-top: 1px solid #111827;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    #chat-input {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid #374151;
+      background-color: #020617;
+      color: #e5e7eb;
+      font-size: 13px;
+    }
+
+    #chat-input::placeholder {
+      color: #6b7280;
+    }
+
+    #chat-send {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .support-summary {
+      background: radial-gradient(circle at top left, #020617, #020617);
+      border-radius: 14px;
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      padding: 14px 16px 16px;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    .support-summary h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #f9fafb;
+    }
+
+    .support-summary ul {
+      margin-top: 6px;
+      padding-left: 16px;
+    }
+
+    .support-summary li {
+      margin-bottom: 4px;
+    }
+
+    footer {
+      background-color: #020617;
+      color: #9ca3af;
+      padding: 24px 48px;
+      font-size: 13px;
+      margin-top: 32px;
+    }
+
+    .footer-links {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      margin-right: 16px;
+      font-size: 13px;
+    }
+
+    .footer-links a:hover {
+      color: #f9fafb;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 16px;
+      }
+      footer {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">FoodExpress</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="help.html" class="active-link">Help</a></li>
+        <li>
+          <button class="login-btn">Login</button>
+          <button class="signup-btn">Sign up</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="page-title">Help & Support</h1>
+    <p class="page-subtitle">
+      Choose how you want to reach us. You can directly call our helpline, or ask SupportBuddy (our AI
+      chatbot) to understand your issue and connect you to the right support option.
+    </p>
+
+    <section class="options-row">
+      <article class="option-card">
+        <div class="option-label">Option 1</div>
+        <h2 class="option-title">Call helpline</h2>
+        <p class="option-text">
+          Speak directly with a support agent for urgent order, payment, or delivery issues.
+        </p>
+        <div class="helpline-number">18001234567</div>
+        <a class="primary-btn" href="tel:18001234567">
+          Call now
+        </a>
+      </article>
+
+      <article class="option-card">
+        <div class="option-label">Option 2</div>
+        <h2 class="option-title">Chat with SupportBuddy</h2>
+        <p class="option-text">
+          Tell our AI chatbot what went wrong. SupportBuddy will summarize your query and guide you to call
+          support with all details ready.
+        </p>
+        <button class="secondary-btn" onclick="document.getElementById('chat-input').focus()">
+          Start AI chat
+        </button>
+      </article>
+    </section>
+
+    <section>
+      <h2 class="chat-section-title">Chat with SupportBuddy</h2>
+      <div class="chat-wrapper">
+        <div class="chat-container" id="chat-container">
+          <div class="chat-header">
+            <div class="bot-avatar">S</div>
+            <div>
+              <div class="bot-title">SupportBuddy</div>
+              <div class="bot-subtitle">AI assistant · connects you to support</div>
+            </div>
+          </div>
+          <div class="chat-messages" id="chat-messages">
+            <div class="msg msg-bot">
+              Hi! I&apos;m SupportBuddy. Describe your issue (for example: payment failed, order not delivered,
+              wrong items), and I&apos;ll get a summary ready so you can call our helpline with all details.
+            </div>
+          </div>
+          <div class="chat-input-row">
+            <input
+              id="chat-input"
+              type="text"
+              placeholder="Type your issue here, then press Enter or Send"
+            />
+            <button id="chat-send">Send</button>
+          </div>
+        </div>
+
+        <aside class="support-summary">
+          <h3>What SupportBuddy does</h3>
+          <p>
+            This chatbot does <strong>not</strong> place orders or talk to agents. It:
+          </p>
+          <ul>
+            <li>Reads your message and turns it into a clear summary.</li>
+            <li>Suggests what information to mention on the call.</li>
+            <li>Shows the helpline number so you can dial it.</li>
+          </ul>
+          <p style="margin-top: 6px;">
+            When you&apos;re ready, tap <strong>Call now</strong> above to connect to support.
+          </p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Terms &amp; Conditions</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div>
+      © 2026 FoodExpress. Not affiliated with Swiggy. Demo clone for learning HTML &amp; CSS.
+    </div>
+  </footer>
+
+  <script>
+    const chatInput = document.getElementById("chat-input");
+    const chatSend = document.getElementById("chat-send");
+    const chatMessages = document.getElementById("chat-messages");
+
+    function appendMessage(text, type) {
+      const msg = document.createElement("div");
+      msg.classList.add("msg");
+      msg.classList.add(type === "user" ? "msg-user" : "msg-bot");
+      msg.textContent = text;
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function handleUserMessage() {
+      const text = (chatInput.value || "").trim();
+      if (!text) return;
+
+      appendMessage(text, "user");
+      chatInput.value = "";
+
+      const summary =
+        "Got it. Here is a short summary of your issue that you can mention on the call: \"" +
+        text +
+        '"';
+      const nextSteps =
+        "Now, please call our helpline at 18001234567. Tell them this summary and they will connect you to the right support team.";
+
+      setTimeout(() => {
+        appendMessage(summary, "bot");
+        setTimeout(() => {
+          appendMessage(nextSteps, "bot");
+        }, 800);
+      }, 600);
+    }
+
+    if (chatSend && chatInput && chatMessages) {
+      chatSend.addEventListener("click", handleUserMessage);
+      chatInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          handleUserMessage();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+

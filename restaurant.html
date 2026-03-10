@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Pino'z Pizza | FoodExpress</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #020617, #020617 40%, #000 100%);
+      color: #e5e7eb;
+    }
+
+    header {
+      background-color: rgba(3, 7, 18, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(55, 65, 81, 0.7);
+      padding: 12px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #f97316;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #9ca3af;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #f97316, #facc15);
+      transition: width 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #f9fafb;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .login-btn {
+      padding: 6px 14px;
+      border-radius: 4px;
+      border: 1px solid #f97316;
+      background-color: transparent;
+      color: #f97316;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .signup-btn {
+      padding: 6px 14px;
+      border-radius: 4px;
+      border: none;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      cursor: pointer;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 32px auto 56px;
+      padding: 20px 18px 32px;
+      border-radius: 24px;
+      background: radial-gradient(circle at top left, #020617, #020617);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    }
+
+    .restaurant-hero {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .restaurant-info {
+      flex: 1;
+    }
+
+    .restaurant-name {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .restaurant-cuisine {
+      font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .restaurant-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+
+    .rating-pill {
+      background-color: #22c55e;
+      color: #052e16;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .restaurant-address {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .restaurant-hero-badge {
+      width: 220px;
+      height: 130px;
+      border-radius: 20px;
+      background-image: url("https://images.pexels.com/photos/2619967/pexels-photo-2619967.jpeg?auto=compress&cs=tinysrgb&w=800");
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .restaurant-hero {
+        flex-direction: column;
+      }
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .menu-section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: radial-gradient(circle at top left, #020617, #020617);
+      border: 1px solid #374151;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 1);
+    }
+
+    .menu-main {
+      flex: 1;
+    }
+
+    .menu-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .menu-desc {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .menu-price {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .menu-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .add-btn {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .badge-veg {
+      font-size: 11px;
+      color: #22c55e;
+    }
+
+    .badge-nonveg {
+      font-size: 11px;
+      color: #f97316;
+    }
+
+    .cart-panel {
+      background-color: #020617;
+      border-radius: 16px;
+      border: 1px solid #374151;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      padding: 14px 16px 16px;
+      font-size: 13px;
+    }
+
+    .cart-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .cart-items {
+      max-height: 220px;
+      overflow-y: auto;
+      margin-bottom: 8px;
+    }
+
+    .cart-item-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .cart-item-name {
+      font-size: 13px;
+    }
+
+    .cart-item-meta {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+      font-weight: 600;
+    }
+
+    .proceed-btn {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    .proceed-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .cart-note {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    footer {
+      background-color: #020617;
+      color: #9ca3af;
+      padding: 24px 48px;
+      font-size: 13px;
+      margin-top: 32px;
+    }
+
+    .footer-links {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      margin-right: 16px;
+      font-size: 13px;
+    }
+
+    .footer-links a:hover {
+      color: #f9fafb;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 16px;
+      }
+      footer {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">FoodExpress</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="help.html">Help</a></li>
+        <li>
+          <button class="login-btn">Login</button>
+          <button class="signup-btn">Sign up</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="restaurant-hero">
+      <div class="restaurant-info">
+        <h1 class="restaurant-name">La Pino&apos;z Pizza</h1>
+        <p class="restaurant-cuisine">Pizzas · Italian · Fast Food</p>
+        <div class="restaurant-meta">
+          <span class="rating-pill">4.3 ★</span>
+          <span>30 mins</span>
+          <span>₹300 for two</span>
+        </div>
+        <p class="restaurant-address">FC Road, Pune · 2.1 km away</p>
+      </div>
+      <div class="restaurant-hero-badge"></div>
+    </section>
+
+    <section class="layout">
+      <div>
+        <h2 class="menu-section-title">Recommended</h2>
+        <div class="menu-list">
+          <article class="menu-item" data-name="Margherita Pizza" data-price="199">
+            <div class="menu-main">
+              <div class="menu-name">Margherita Pizza</div>
+              <div class="menu-desc">Classic cheese pizza with tomato sauce and mozzarella.</div>
+              <div class="menu-price">₹199</div>
+            </div>
+            <div class="menu-actions">
+              <span class="badge-veg">Veg</span>
+              <button class="add-btn">Add to cart</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-name="Paneer Tikka Pizza" data-price="259">
+            <div class="menu-main">
+              <div class="menu-name">Paneer Tikka Pizza</div>
+              <div class="menu-desc">Spicy paneer tikka, onions, capsicum and cheese.</div>
+              <div class="menu-price">₹259</div>
+            </div>
+            <div class="menu-actions">
+              <span class="badge-veg">Veg</span>
+              <button class="add-btn">Add to cart</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-name="Chicken Overload Pizza" data-price="289">
+            <div class="menu-main">
+              <div class="menu-name">Chicken Overload Pizza</div>
+              <div class="menu-desc">Loaded with chicken sausages, tikka and cheese.</div>
+              <div class="menu-price">₹289</div>
+            </div>
+            <div class="menu-actions">
+              <span class="badge-nonveg">Non-veg</span>
+              <button class="add-btn">Add to cart</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-name="Garlic Breadsticks" data-price="129">
+            <div class="menu-main">
+              <div class="menu-name">Garlic Breadsticks</div>
+              <div class="menu-desc">Soft, buttery garlic bread served with dip.</div>
+              <div class="menu-price">₹129</div>
+            </div>
+            <div class="menu-actions">
+              <span class="badge-veg">Veg</span>
+              <button class="add-btn">Add to cart</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-name="Choco Lava Cake" data-price="99">
+            <div class="menu-main">
+              <div class="menu-name">Choco Lava Cake</div>
+              <div class="menu-desc">Warm chocolate cake with molten center.</div>
+              <div class="menu-price">₹99</div>
+            </div>
+            <div class="menu-actions">
+              <span class="badge-veg">Veg</span>
+              <button class="add-btn">Add to cart</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <aside class="cart-panel">
+        <h2 class="cart-title">Your cart</h2>
+        <div id="cart-items" class="cart-items">
+          <p id="empty-cart-text">Your cart is empty. Add some items from the menu.</p>
+        </div>
+        <div class="cart-total-row">
+          <span>Total</span>
+          <span id="cart-total">₹0</span>
+        </div>
+        <button id="proceed-billing" class="proceed-btn" disabled>Proceed to billing</button>
+        <p class="cart-note">
+          You can review your cart and choose a payment method on the billing page.
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Terms &amp; Conditions</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div>
+      © 2026 FoodExpress. Not affiliated with Swiggy. Demo clone for learning HTML &amp; CSS.
+    </div>
+  </footer>
+
+  <script>
+    const cartItems = [];
+    const cartItemsContainer = document.getElementById("cart-items");
+    const cartTotalEl = document.getElementById("cart-total");
+    const emptyCartText = document.getElementById("empty-cart-text");
+    const proceedBtn = document.getElementById("proceed-billing");
+
+    function renderCart() {
+      cartItemsContainer.innerHTML = "";
+
+      if (cartItems.length === 0) {
+        const p = document.createElement("p");
+        p.id = "empty-cart-text";
+        p.textContent = "Your cart is empty. Add some items from the menu.";
+        cartItemsContainer.appendChild(p);
+        cartTotalEl.textContent = "₹0";
+        proceedBtn.disabled = true;
+        return;
+      }
+
+      let total = 0;
+
+      cartItems.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = "cart-item-row";
+
+        const left = document.createElement("div");
+        const nameEl = document.createElement("div");
+        nameEl.className = "cart-item-name";
+        nameEl.textContent = item.name;
+
+        const metaEl = document.createElement("div");
+        metaEl.className = "cart-item-meta";
+        metaEl.textContent = `Qty: ${item.qty} · ₹${item.price}`;
+
+        left.appendChild(nameEl);
+        left.appendChild(metaEl);
+
+        const right = document.createElement("div");
+        right.textContent = "₹" + item.price * item.qty;
+
+        row.appendChild(left);
+        row.appendChild(right);
+        cartItemsContainer.appendChild(row);
+
+        total += item.price * item.qty;
+      });
+
+      cartTotalEl.textContent = "₹" + total;
+      proceedBtn.disabled = false;
+    }
+
+    function addToCart(name, price) {
+      const existing = cartItems.find((item) => item.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cartItems.push({ name, price, qty: 1 });
+      }
+      renderCart();
+    }
+
+    document.querySelectorAll(".menu-item").forEach((itemEl) => {
+      const name = itemEl.getAttribute("data-name");
+      const price = parseInt(itemEl.getAttribute("data-price"), 10) || 0;
+      const btn = itemEl.querySelector(".add-btn");
+      if (btn) {
+        btn.addEventListener("click", () => addToCart(name, price));
+      }
+    });
+
+    if (proceedBtn) {
+      proceedBtn.addEventListener("click", () => {
+        if (!cartItems.length) return;
+        try {
+          const payload = {
+            restaurant: "La Pino'z Pizza",
+            items: cartItems,
+          };
+          localStorage.setItem("fe_cart", JSON.stringify(payload));
+        } catch (e) {
+          // ignore storage errors; still navigate
+        }
+        window.location.href = "billing.html";
+      });
+    }
+  </script>
+</body>
+</html>
+
